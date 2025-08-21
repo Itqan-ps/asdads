@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدماتنا - منصة إتقان</title>
+    <!-- Tailwind CSS CDN for a unified look -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- CSS للكاردز والتصميم -->
+    <style>
+        /* Service Cards */
+        .service-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* تحسينات الهيدر */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-container img {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .platform-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* قائمة التنقل */
+        .desktop-nav {
+            display: none;
+        }
+        
+        @media (min-width: 768px) {
+            .desktop-nav {
+                display: flex !important;
+            }
+        }
+        
+        .desktop-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .desktop-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .desktop-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* قائمة الهامبرغر */
+        .burger {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .burger input {
+            display: none;
+        }
+
+        .burger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 2px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .burger span:nth-child(2) {
+            top: 6px;
+        }
+
+        .burger span:nth-child(3) {
+            top: 13px;
+        }
+
+        .burger span:nth-child(4) {
+            top: 20px;
+        }
+
+        .burger input:checked ~ span:nth-child(2) {
+            top: 13px;
+            transform: rotate(135deg);
+        }
+
+        .burger input:checked ~ span:nth-child(3) {
+            opacity: 0;
+            left: -60px;
+        }
+
+        .burger input:checked ~ span:nth-child(4) {
+            top: 13px;
+            transform: rotate(-135deg);
+        }
+
+        /* القائمة المحمولة */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding-top: 80px;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            color: #374151;
+            text-decoration: none;
+            border-bottom: 1px solid #f3f4f6;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            background-color: #f8fafc;
+            color: #2563eb;
+            padding-right: 2rem;
+        }
+
+        .mobile-menu a svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        /* تلجرام */
+        .telegram-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .telegram-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* تحسينات للجوال */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0.75rem 1rem;
+            }
+
+            .logo-container img {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+
+            .platform-title {
+                font-size: 1.25rem;
+            }
+
+            .telegram-button {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        /* خلفية للقائمة المحمولة */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body class="bg-[#f0f4f8] text-[#1a202c]">
+    <!-- شريط تقدم للقراءة -->
+    <div class="reading-progress">
+        <div class="progress-bar"></div>
+    </div>
+
+    <!-- خلفية القائمة المحمولة -->
+    <div id="mobile-overlay" class="mobile-overlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto header-container">
+            <!-- Platform Logo and Name -->
+            <div class="logo-container">
+                <a href="index2.html" class="logo-container">
+                    <img src="photo/logo.png" alt="شعار منصة إتقان">
+                    <h1 class="platform-title">منصة إتقان</h1>
+                </a>
+            </div>
+
+            <!-- القائمة الرئيسية للكمبيوتر -->
+            <nav class="desktop-nav md:flex flex-1 justify-center" style="display: flex;">
+                <ul>
+                    <li><a href="index2.html">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        الصفحة الرئيسية
+                    </a></li>
+                    <li><a href="#student-tools">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                        أدوات الطالب
+                    </a></li>
+                    <li><a href="services.html">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        خدماتنا المجانية والمدفوعة
+                    </a></li>
+                    <li><a href="#universities">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+                        اختر جامعتك
+                    </a></li>
+                    <li><a href="#majors">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        اختر تخصصك الأكاديمي
+                    </a></li>
+                    <li><a href="us.html">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.37-2 1l-3.72 5.58L8.54 8H6c-.8 0-1.54.37-2 1L1.46 16H4v6h2v-6h2.5l1.22-1.22L11.5 16H14v6h2zm-7.5-10.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10.5s.67 1.5 1.5 1.5zM7 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2z"/></svg>
+                        فريق المنصة
+                    </a></li>
+                </ul>
+            </nav>
+
+            <!-- تلجرام والهامبرغر -->
+            <div class="flex items-center gap-4">
+                <!-- تلجرام -->
+                <a href="https://t.me/yazanxosaid" target="_blank" class="telegram-button">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+                    </svg>
+                    <span class="hidden sm:inline">تلجرام</span>
+                </a>
+
+                <!-- Burger Menu for Mobile -->
+                <div class="md:hidden">
+                    <label class="burger" for="burger">
+                        <input type="checkbox" id="burger" onchange="toggleMobileMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- قائمة الهاتف المحمول -->
+    <nav id="mobile-menu" class="mobile-menu">
+        <a href="index2.html" onclick="closeMobileMenu();">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            الصفحة الرئيسية
+        </a>
+        <a href="#student-tools" onclick="closeMobileMenu();">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+            أدوات الطالب
+        </a>
+        <a href="services.html" onclick="closeMobileMenu();">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            خدماتنا المجانية والمدفوعة
+        </a>
+        <a href="#universities" onclick="closeMobileMenu();">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+            اختر جامعتك
+        </a>
+        <a href="#majors" onclick="closeMobileMenu();">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            اختر تخصصك الأكاديمي
+        </a>
+        <a href="us.html" onclick="closeMobileMenu();">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.37-2 1l-3.72 5.58L8.54 8H6c-.8 0-1.54.37-2 1L1.46 16H4v6h2v-6h2.5l1.22-1.22L11.5 16H14v6h2zm-7.5-10.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10.5s.67 1.5 1.5 1.5zM7 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2z"/></svg>
+            فريق المنصة
+        </a>
+        <a href="https://t.me/yazanxosaid" target="_blank">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+            </svg>
+            تلجرام
+        </a>
+    </nav>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileOverlay = document.getElementById('mobile-overlay');
+            
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileOverlay = document.getElementById('mobile-overlay');
+            const burgerInput = document.getElementById('burger');
+            
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            burgerInput.checked = false;
+        }
+    </script>
+    <!-- Hero Section for Services -->
+    <section class="relative bg-gradient-to-br from-blue-500 to-indigo-600 text-white py-20 px-4 text-center rounded-lg m-4 shadow-xl overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');"></div>
+        
+        <!-- Dark overlay for better text readability -->
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-900/60 to-blue-900/60"></div>
+        
+        <!-- Content -->
+        <div class="container mx-auto relative z-10">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight drop-shadow-2xl">
+                خدماتنا المتميزة
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-95 drop-shadow-lg font-semibold">
+                اختر الخطة التي تناسب احتياجاتك الأكاديمية
+            </p>
+            <p class="text-center text-white text-lg leading-relaxed mb-12 max-w-3xl mx-auto drop-shadow-lg font-medium">
+                نقدم لك مجموعة شاملة من الخدمات الأكاديمية المصممة خصيصاً لدعم رحلتك التعليمية، من الخدمات المجانية الأساسية إلى الحلول المتقدمة المدفوعة التي تضمن لك التميز والنجاح.
+            </p>
+        </div>
+    </section>
+
+    <!-- Free Services Section -->
+    <section class="py-16 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#004b93] mb-4">الخدمات المجانية</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    ابدأ رحلتك الأكاديمية مع مجموعة من الأدوات المجانية المفيدة
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Free Service 1: إرشاد أكاديمي -->
+                <div class="relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-gradient-to-r from-emerald-400 to-teal-500 overflow-hidden group">
+                    <!-- Background Image covering the entire card -->
+                    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 group-hover:opacity-30 transition-opacity duration-300" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnR3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNDA5NGZmO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM2MzY2ZjE7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8IS0tIEJhY2tncm91bmQgLS0+CiAgPHJlY3Qgd2lkdGg9IjE1MCIgaGVpZ2h0PSIxNTAiIGZpbGw9InVybCgjYmdHcmFkaWVudCkiLz4KICA8IS0tIFBlcnNvbiAtLT4KICA8Y2lyY2xlIGN4PSI3NSIgY3k9IjUwIiByPSIyMCIgZmlsbD0iI2ZmZjJkYyIgc3Ryb2tlPSIjZjU5ZTBiIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNNTUgODBjMC0xMSA5LTIwIDIwLTIwczIwIDkgMjAgMjB2MzBINTV2LTMweiIgZmlsbD0iIzNiODJmNiIvPgogIDxwYXRoIGQ9Ik02NSA5MGg2djEwaDZ2MTBoLTE4di0xMGg2di0xMHoiIGZpbGw9IiNmZmYiLz4KICA8IS0tIE1lZGFsIC0tPgogIDxjaXJjbGUgY3g9IjEyMCIgY3k9IjQwIiByPSIxNSIgZmlsbD0iI2ZmZDcwMCIgc3Ryb2tlPSIjZjU5ZTBiIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNMTIwIDMwbDQgOGg4bC02IDZsMyA4LTktNS05IDUtMyA4LTYtNmg4bDQtOHoiIGZpbGw9IiNmZmYiLz4KICA8IS0tIENsb2NrIC0tPgogIDxjaXJjbGUgY3g9IjMwIiBjeT0iNDAiIHI9IjEyIiBmaWxsPSIjZmZmIiBzdHJva2U9IiMzNzQxNTEiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxsaW5lIHgxPSIzMCIgeTE9IjMwIiB4Mj0iMzAiIHkyPSI0MCIgc3Ryb2tlPSIjMzc0MTUxIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iMzAiIHkxPSI0MCIgeDI9IjM2IiB5Mj0iNDAiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPCEtLSBDYWxlbmRhciAtLT4KICA8cmVjdCB4PSIxMDAiIHk9IjgwIiB3aWR0aD0iMzAiIGhlaWdodD0iMjUiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGxpbmUgeDE9IjEwNSIgeTE9Ijc1IiB4Mj0iMTA1IiB5Mj0iODUiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGxpbmUgeDE9IjEyNSIgeTE9Ijc1IiB4Mj0iMTI1IiB5Mj0iODUiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGxpbmUgeDE9IjEwNSIgeTE9IjkwIiB4Mj0iMTI1IiB5Mj0iOTAiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPCEtLSBTdGFycyAtLT4KICA8cGF0aCBkPSJNMjAgMTIwbDMgNmg2bC01IDRsMiA2LTYtNC02IDQtMi02LTUtNGg2bDMtNnoiIGZpbGw9IiNmZmQ3MDAiLz4KICA8cGF0aCBkPSJNMTMwIDEyMGwzIDZoNmwtNSA0bDIgNi02LTQtNiA0LTItNi01LTRoNmwzLTZ6IiBmaWxsPSIjZmZkNzAwIi8+CiAgPHBhdGggZD0iTTc1IDEzMGwzIDZoNmwtNSA0bDIgNi02LTQtNiA0LTItNi01LTRoNmwzLTZ6IiBmaWxsPSIjZmZkNzAwIi8+Cjwvc3ZnPg==');"></div>
+    
+                    <!-- Light overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-50/20 via-teal-50/15 to-cyan-50/20"></div>
+    
+                    <!-- Content overlay -->
+                    <div class="relative z-10 p-6">
+                        <div class="text-center mb-4">
+                            <h3 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600 mb-2">
+                                إرشاد أكاديمي
+                            </h3>
+                            <div class="w-12 h-0.5 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto rounded-full"></div>
+                        </div>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-sm border border-emerald-100/50">
+                                <span class="text-sm font-medium text-gray-800">
+                                    توجيه في اختيار التخصص
+                                </span>
+                            </div>
+                            
+                            <div class="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-sm border border-emerald-100/50">
+                                <span class="text-sm font-medium text-gray-800">
+                                    نصائح للنجاح الأكاديمي
+                                </span>
+                            </div>
+                            
+                            <div class="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-sm border border-emerald-100/50">
+                                <span class="text-sm font-medium text-gray-800">
+                                    خطة دراسية مبدئية
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <a href="https://wa.me/972568401548?text=أريد%20إرشاد%20أكاديمي%20مجاني" target="_blank" class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-sm py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                                ابدأ الآن مجاناً
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Free Service 2: مساعدة في المواد الدراسية -->
+<div class="relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-gradient-to-r from-blue-400 to-indigo-500 overflow-hidden group">
+    <!-- Background Image -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 group-hover:opacity-30 transition-opacity duration-300" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnR3JhZGllbnQyIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzYzNjZmMTtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNDA5NGZmO3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPCEtLSBCYWNrZ3JvdW5kIC0tPgogIDxyZWN0IHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiBmaWxsPSJ1cmwoI2JnR3JhZGllbnQyKSIvPgogIDwhLS0gQm9va3MgLS0+CiAgPHJlY3QgeD0iMzAiIHk9IjQwIiB3aWR0aD0iMjAiIGhlaWdodD0iMzAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIyIiByeD0iMiIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjM1IiBmaWxsPSIjZmZmIiBzdHJva2U9IiMzNzQxNTEiIHN0cm9rZS13aWR0aD0iMiIgcng9IjIiLz4KICA8cmVjdCB4PSI4MCIgeT0iNDUiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyNSIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjMzc0MTUxIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSIyIi8+CiAgPCEtLSBQZW5jaWwgLS0+CiAgPGxpbmUgeDE9IjEwNSIgeTE9IjMwIiB4Mj0iMTIwIiB5Mj0iNDUiIHN0cm9rZT0iI2ZmZDcwMCIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSIxMjIiIGN5PSI0NyIgcj0iMyIgZmlsbD0iI2ZmZDcwMCIvPgogIDwhLS0gTm90ZXMgLS0+CiAgPGxpbmUgeDE9IjM1IiB5MT0iNTAiIHgyPSI0NSIgeTI9IjUwIiBzdHJva2U9IiMzNzQxNTEiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIzNSIgeTE9IjU1IiB4Mj0iNDMiIHkyPSI1NSIgc3Ryb2tlPSIjMzc0MTUxIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8bGluZSB4MT0iNjAiIHkxPSI0NSIgeDI9IjcwIiB5Mj0iNDUiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGxpbmUgeDE9IjYwIiB5MT0iNTAiIHgyPSI2OCIgeTI9IjUwIiBzdHJva2U9IiMzNzQxNTEiIHN0cm9rZS13aWR0aD0iMSIvPgogIDwhLS0gU3RhcnMgLS0+CiAgPHBhdGggZD0iTTI1IDEwMGwzIDZoNmwtNSA0bDIgNi02LTQtNiA0LTItNi01LTRoNmwzLTZ6IiBmaWxsPSIjZmZkNzAwIi8+CiAgPHBhdGggZD0iTTc1IDEwNWwzIDZoNmwtNSA0bDIgNi02LTQtNiA0LTItNi01LTRoNmwzLTZ6IiBmaWxsPSIjZmZkNzAwIi8+CiAgPHBhdGggZD0iTTEyNSAxMDBsMyA2aDZsLTUgNGwyIDYtNi00LTYgNC0yLTYtNS00aDZsMy02eiIgZmlsbD0iI2ZmZDcwMCIvPgo8L3N2Zz4=');"></div>
+    
+    <!-- Light overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-50/20 via-indigo-50/15 to-purple-50/20"></div>
+    
+    <!-- Content overlay -->
+    <div class="relative z-10 p-6">
+        <div class="text-center mb-4">
+            <h3 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-2">
+                مساعدة في المواد الدراسية
+            </h3>
+            <div class="w-12 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-400 mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="space-y-3 mb-6">
+            <div class="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-sm border border-blue-100/50 transform hover:scale-105 hover:bg-white/95 transition-all duration-300">
+                <span class="text-sm font-medium text-gray-800">
+                    حل الواجبات والتمارين
+                </span>
+            </div>
+            
+            <div class="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-sm border border-blue-100/50 transform hover:scale-105 hover:bg-white/95 transition-all duration-300">
+                <span class="text-sm font-medium text-gray-800">
+                    شرح المفاهيم الصعبة
+                </span>
+            </div>
+            
+            <div class="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-sm border border-blue-100/50 transform hover:scale-105 hover:bg-white/95 transition-all duration-300">
+                <span class="text-sm font-medium text-gray-800">
+                    استراتيجيات المذاكرة
+                </span>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <a href="https://wa.me/972568401548?text=أريد%20مساعدة%20في%20المواد%20الدراسية" target="_blank" class="inline-flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold text-sm py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                احصل على المساعدة
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+                <!-- Free Service 3: توجيه ومساعدة في العروض التقديمية -->
+                <div class="relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-gradient-to-r from-green-400 to-teal-500 overflow-hidden group">
+                    <!-- Background Image -->
+                    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 group-hover:opacity-30 transition-opacity duration-300" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnR3JhZGllbnQzIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzEwYjk4MTtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDZiNmQ0O3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPCEtLSBCYWNrZ3JvdW5kIC0tPgogIDxyZWN0IHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiBmaWxsPSJ1cmwoI2JnR3JhZGllbnQzKSIvPgogIDwhLS0gUHJlc2VudGF0aW9uIFNjcmVlbiAtLT4KICA8cmVjdCB4PSIyMCIgeT0iMzAiIHdpZHRoPSIxMTAiIGhlaWdodD0iNzAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIzIiByeD0iNSIvPgogIDwhLS0gU2NyZWVuIENvbnRlbnQgLS0+CiAgPHJlY3QgeD0iMzAiIHk9IjQwIiB3aWR0aD0iOTAiIGhlaWdodD0iNTAiIGZpbGw9IiNmMGY5ZmYiLz4KICA8IS0tIENoYXJ0IC0tPgogIDxyZWN0IHg9IjQwIiB5PSI2MCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjMTBiOTgxIi8+CiAgPHJlY3QgeD0iNTUiIHk9IjUwIiB3aWR0aD0iMTAiIGhlaWdodD0iMzAiIGZpbGw9IiMxMGI5ODEiLz4KICA8cmVjdCB4PSI3MCIgeT0iNTUiIHdpZHRoPSIxMCIgaGVpZ2h0PSIyNSIgZmlsbD0iIzEwYjk4MSIvPgogIDxyZWN0IHg9Ijg1IiB5PSI0NSIgd2lkdGg9IjEwIiBoZWlnaHQ9IjM1IiBmaWxsPSIjMTBiOTgxIi8+CiAgPCEtLSBQZXJzb24gUHJlc2VudGluZyAtLT4KICA8Y2lyY2xlIGN4PSI3NSIgY3k9IjExNSIgcj0iOCIgZmlsbD0iI2ZmZjJkYyIgc3Ryb2tlPSIjZjU5ZTBiIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNNjcgMTI1YzAtNiA0LTEwIDgtMTBzOCA0IDggMTB2MTJINjd2LTEyeiIgZmlsbD0iIzNiODJmNiIvPgogIDxsaW5lIHgxPSI2MCIgeTE9IjEzMCIgeDI9IjUwIiB5Mj0iMTIwIiBzdHJva2U9IiMzNzQxNTEiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPCEtLSBTdGFycyAtLT4KICA8cGF0aCBkPSJNMTAwIDIwbDIgNGg0bC0zIDNsMSA0LTQtMi00IDItMS00LTMtM2g0bDItNHoiIGZpbGw9IiNmZmQ3MDAiLz4KICA8cGF0aCBkPSJNMTIwIDI1bDIgNGg0bC0zIDNsMSA0LTQtMi00IDItMS00LTMtM2g0bDItNHoiIGZpbGw9IiNmZmQ3MDAiLz4KICA8cGF0aCBkPSJNMTI1IDEwMGwzIDZoNmwtNSA0bDIgNi02LTQtNiA0LTItNi01LTRoNmwzLTZ6IiBmaWxsPSIjZmZkNzAwIi8+Cjwvc3ZnPg==');"></div>
+    
+                    <!-- Light overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-green-50/20 via-teal-50/15 to-cyan-50/20"></div>
+    
+                    <!-- Content overlay -->
+                    <div class="relative z-10 p-6">
+                        <div class="text-center mb-4">
+                            <h3 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-teal-600 mb-2">
+                                العروض التقديمية
+                            </h3>
+                            <div class="w-12 h-0.5 bg-gradient-to-r from-green-400 to-teal-400 mx-auto rounded-full"></div>
+                        </div>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-sm border border-green-100/50 transform hover:scale-105 hover:bg-white/95 transition-all duration-300">
+                                <span class="text-sm font-medium text-gray-800">
+                                    تصميم الشرائح الأساسي
+                                </span>
+                            </div>
+                            
+                            <div class="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-sm border border-green-100/50 transform hover:scale-105 hover:bg-white/95 transition-all duration-300">
+                                <span class="text-sm font-medium text-gray-800">
+                                    نصائح للعرض الفعال
+                                </span>
+                            </div>
+                            
+                            <div class="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-sm border border-green-100/50 transform hover:scale-105 hover:bg-white/95 transition-all duration-300">
+                                <span class="text-sm font-medium text-gray-800">
+                                    قوالب جاهزة بسيطة
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <a href="https://wa.me/972568401548?text=أريد%20مساعدة%20في%20العروض%20التقديمية" target="_blank" class="inline-flex items-center justify-center bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-semibold text-sm py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                                ابدأ عرضك
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+              <!-- Paid Services Section -->
+<section class="py-12 px-4 bg-gray-50">
+    <div class="container mx-auto">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-[#004b93] mb-3">الخدمات المدفوعة</h2>
+            <p class="text-base text-gray-600 max-w-2xl mx-auto">
+                خدمات متقدمة ومخصصة لضمان تفوقك الأكاديمي والمهني
+            </p>
+        </div>
+        
+        <!-- الصف الأول: تدريس جامعي، تدريس مدارس، شراء ملخصات -->
+        <div class="grid md:grid-cols-3 gap-6 mb-6">
+            <!-- Paid Service 1 - تدريس المواد الجامعية -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-t-4 border-blue-500">
+                <div class="text-center mb-4">
+                    <!-- صورة معلم يشرح على السبورة -->
+                    <div class="w-full h-24 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mx-auto mb-3 overflow-hidden">
+                        <svg class="w-16 h-16 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7V9C15 9.55 14.55 10 14 10S13 9.55 13 9V7H11V9C11 9.55 10.45 10 10 10S9 9.55 9 9V7H3V9H21ZM12 8C12.55 8 13 8.45 13 9S12.55 10 12 10 11 9.55 11 9 11.45 8 12 8ZM3 11V21H21V11H3ZM5 13H19V19H5V13Z"/>
+                            <!-- إضافة عناصر السبورة والمعلم -->
+                            <rect x="4" y="13" width="16" height="6" fill="#1e40af" opacity="0.1" rx="1"/>
+                            <line x1="6" y1="15" x2="18" y2="15" stroke="#1e40af" stroke-width="0.5"/>
+                            <line x1="6" y1="16" x2="15" y2="16" stroke="#1e40af" stroke-width="0.5"/>
+                            <line x1="6" y1="17" x2="17" y2="17" stroke="#1e40af" stroke-width="0.5"/>
+                            <!-- شخصية المعلم -->
+                            <circle cx="12" cy="11" r="1" fill="#1e40af"/>
+                            <rect x="11.5" y="12" width="1" height="2" fill="#1e40af"/>
+                            <line x1="11" y1="13" x2="10" y2="14" stroke="#1e40af" stroke-width="0.5"/>
+                            <line x1="13" y1="13" x2="14" y2="14" stroke="#1e40af" stroke-width="0.5"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">تدريس المواد الجامعية</h3>
+                </div>
+                <ul class="text-gray-600 mb-4 space-y-1 text-sm">
+                    <li class="flex items-center">
+                        <svg class="w-3 h-3 text-blue-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        تدريس فردي مخصص
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-3 h-3 text-blue-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        جميع المواد الدراسية
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-3 h-3 text-blue-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        تحضير للامتحانات
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-3 h-3 text-blue-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        مواعيد مرنة
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <a href="https://wa.me/972568401548?text=أريد%20تدريس%20المواد%20الجامعية" target="_blank" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105 w-full block text-sm">
+                        اطلب الآن
+                    </a>
+                </div>
+            </div>
+
+            <!-- Paid Service 2 - تدريس طلاب المدارس -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-t-4 border-purple-500">
+                <div class="text-center mb-4">
+                    <!-- صورة تدريس المدارس -->
+                    <div class="w-full h-24 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center mx-auto mb-3 overflow-hidden">
+                        <svg class="w-16 h-16 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 3L1 9L12 15L21 12.09V17H23V9M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z"/>
+                            <!-- إضافة عناصر الكتب والطلاب -->
+                            <rect x="8" y="10" width="8" height="1" fill="#7c3aed" opacity="0.6"/>
+                            <rect x="9" y="11" width="6" height="1" fill="#7c3aed" opacity="0.6"/>
+                            <circle cx="7" cy="12" r="0.5" fill="#7c3aed"/>
+                            <circle cx="17" cy="12" r="0.5" fill="#7c3aed"/>
+                            <circle cx="12" cy="8" r="0.5" fill="#7c3aed"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">تدريس طلاب المدارس والثانوية العامة</h3>
+                </div>
+                <ul class="text-gray-600 mb-4 space-y-1 text-sm">
+                    <li class="flex items-center">
+                        <svg class="w-3 h-3 text-purple-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        جميع المواد الدراسية
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-3 h-3 text-purple-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        تحضير للامتحانات
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-3 h-3 text-purple-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        متابعة مستمرة
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-3 h-3 text-purple-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        مواعيد مرنة
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <a href="https://wa.me/972568401548?text=أريد%20تدريس%20طلاب%20المدارس%20والثانوية" target="_blank" class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105 w-full block text-sm">
+                        اشترك الآن
+                    </a>
+                </div>
+            </div>
+
+            <!-- Paid Service 3 - شراء ملخصات (في الجانب الأيمن) -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-t-4 border-green-500 relative">
+                <div class="absolute top-3 right-3 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                    عرض خاص
+                </div>
+                <div class="text-center mb-4 mt-6">
+                    <!-- صورة الملخصات -->
+                    <div class="w-full h-24 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mx-auto mb-3 overflow-hidden">
+                        <svg class="w-16 h-16 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2M18 20H6V4H13V9H18V20Z"/>
+                            <!-- إضافة خطوط النص -->
+                            <line x1="8" y1="12" x2="16" y2="12" stroke="#16a34a" stroke-width="0.5"/>
+                            <line x1="8" y1="14" x2="15" y2="14" stroke="#16a34a" stroke-width="0.5"/>
+                            <line x1="8" y1="16" x2="17" y2="16" stroke="#16a34a" stroke-width="0.5"/>
+                            <line x1="8" y1="18" x2="14" y2="18" stroke="#16a34a" stroke-width="0.5"/>
+                            <!-- نجمة للجودة -->
+                            <path d="M12 10L13 13L16 13L13.5 15L14.5 18L12 16L9.5 18L10.5 15L8 13L11 13Z" fill="#fbbf24" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">شراء ملخصات جميع مواد التخصص</h3>
+                    <div class="bg-green-50 rounded-lg p-2 mb-2">
+                        <div class="text-2xl font-bold text-green-600 mb-1">5 شيكل</div>
+                        <div class="text-green-700 font-medium text-sm">لكل مادة</div>
+                    </div>
+                </div>
+                <ul class="text-gray-600 mb-4 space-y-2 text-sm">
+                    <li class="flex items-center bg-green-50 p-2 rounded-lg">
+                        <svg class="w-3 h-3 text-green-500 ml-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="font-medium">ملخصات شاملة ومنظمة</span>
+                    </li>
+                    <li class="flex items-center bg-green-50 p-2 rounded-lg">
+                        <svg class="w-3 h-3 text-green-500 ml-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="font-medium">تحت إشراف الأستاذ أسيد نصار</span>
+                    </li>
+                    <li class="flex items-center bg-green-50 p-2 rounded-lg">
+                        <svg class="w-3 h-3 text-green-500 ml-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="font-medium">تسليم فوري بعد الدفع</span>
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <a href="https://wa.me/972568401548?text=أريد%20شراء%20ملخصات%20المواد" target="_blank" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-full block text-sm">
+                        اطلب الآن - 5 شيكل
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- الصف الثاني: شراء الخطط العملية (في الجانب الأيمن) -->
+        <div class="flex justify-end">
+            <div class="w-full max-w-sm">
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-t-4 border-orange-500">
+                    <div class="text-center mb-4">
+                        <!-- صورة الخطط العملية -->
+                        <div class="w-full h-24 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mx-auto mb-3 overflow-hidden">
+                            <svg class="w-16 h-16 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M19 19H5V5H19V19M17 12H15V17H17V12M13 7H11V17H13V7M9 10H7V17H9V10Z"/>
+                                <!-- إضافة عناصر الرسم البياني -->
+                                <rect x="7" y="14" width="2" height="3" fill="#ea580c" opacity="0.6"/>
+                                <rect x="11" y="10" width="2" height="7" fill="#ea580c" opacity="0.6"/>
+                                <rect x="15" y="12" width="2" height="5" fill="#ea580c" opacity="0.6"/>
+                                <!-- خطوط الشبكة -->
+                                <line x1="6" y1="18" x2="18" y2="18" stroke="#ea580c" stroke-width="0.3" opacity="0.5"/>
+                                <line x1="6" y1="15" x2="18" y2="15" stroke="#ea580c" stroke-width="0.3" opacity="0.3"/>
+                                <line x1="6" y1="12" x2="18" y2="12" stroke="#ea580c" stroke-width="0.3" opacity="0.3"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">شراء الخطط لمواد العملي</h3>
+                        <div class="text-2xl font-bold text-orange-600 mb-1">5 شيكل</div>
+                        <div class="text-gray-500 text-sm">لكل خطة</div>
+                    </div>
+                    <ul class="text-gray-600 mb-4 space-y-1 text-sm">
+                        <li class="flex items-center">
+                            <svg class="w-3 h-3 text-orange-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            خطط تفصيلية
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3 h-3 text-orange-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            خطوات التنفيذ المفصلة
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <a href="https://wa.me/972568401548?text=أريد%20شراء%20خطط%20المواد%20العملية" target="_blank" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105 w-full block text-sm">
+                            اطلب الآن
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Enhanced Footer -->
+    <footer class="bg-[#004b93] text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Platform Info Column -->
+                <div class="footer-column lg:col-span-2">
+                    <div class="flex items-center space-x-4 space-x-reverse mb-4">
+                        <div class="animated-logo-small relative">
+                            <svg width="40" height="40" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="bgGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    </linearGradient>
+                                    <linearGradient id="bookGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#feca57;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#ff9ff3;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="60" cy="60" r="50" fill="url(#bgGradientFooter)"/>
+                                <g>
+                                    <path d="M35 30 L35 90 L60 85 L60 25 Z" fill="url(#bookGradientFooter)" stroke="#fff" stroke-width="2"/>
+                                    <path d="M60 25 L60 85 L85 90 L85 30 Z" fill="url(#bookGradientFooter)" stroke="#fff" stroke-width="2"/>
+                                    <line x1="40" y1="40" x2="55" y2="38" stroke="#fff" stroke-width="1.5" opacity="0.8"/>
+                                    <line x1="40" y1="50" x2="55" y2="48" stroke="#fff" stroke-width="1.5" opacity="0.8"/>
+                                    <line x1="65" y1="38" x2="80" y2="40" stroke="#fff" stroke-width="1.5" opacity="0.8"/>
+                                    <line x1="65" y1="48" x2="80" y2="50" stroke="#fff" stroke-width="1.5" opacity="0.8"/>
+                                </g>
+                                <path d="M60 15 L63 25 L73 25 L65 32 L68 42 L60 35 L52 42 L55 32 L47 25 L57 25 Z" fill="#ffd700" stroke="#fff" stroke-width="1"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">منصة إتقان</h3>
+                            <p class="text-blue-200 text-sm">أداة الطالب الشاملة</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-100 leading-relaxed mb-4">
+                        منصة أكاديمية شاملة تهدف إلى دعم الطلبة في رحلتهم التعليمية من خلال أدوات متطورة وخدمات مخصصة تضمن التميز والنجاح.
+                    </p>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="footer-column">
+                    <h4>تواصل معنا</h4>
+                    <p class="text-sm text-blue-100 mb-2">فلسطين. جنين</p>
+                    <a href="mailto:yazanabokaheal@gmail.com" class="flex items-center justify-center md:justify-end text-blue-100 hover:text-white transition-colors mb-2">
+                        <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        yazanabokaheal@gmail.com
+                    </a>
+                    <a href="https://wa.me/972568401548" target="_blank" class="flex items-center justify-center md:justify-end text-blue-100 hover:text-green-300 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-5 w-5 fill-current ml-2"><path d="M380.9 97.1C339.4 55.4 283.4 32 224.2 32c-97.1 0-176 78.9-176 176c0 36.3 11 70.3 32.2 99.4L32 480l105.4-29.6c27.1 14.9 57.3 23.6 88.8 23.6c97.1 0 176-78.9 176-176c0-59.2-23.4-115.2-64.9-156.9zM224.2 448c-30.8 0-60.9-8.8-87.8-25.2L74.8 448l18.4-64.3c-21.6-32.6-34.7-72.2-34.7-113.7c0-85.3 69.2-154.5 154.5-154.5c41.3 0 79.9 16.1 109.1 45.3c29.1 29.1 45.3 67.7 45.3 109.1c0 85.3-69.2 154.5-154.5 154.5zM337.3 294c-2.4-1.2-14.5-7.2-16.7-8.1-2.2-.9-3.8-1.3-5.4 1.3-1.6 2.6-6.2 7.2-7.6 8.6-1.4 1.4-2.8 1.6-5.2 .5-2.4-1.2-10.4-3.8-19.8-12.2-7.4-6.5-12.4-14.6-13.8-16.9-1.4-2.2-.1-3.4 1.1-4.7 1.2-1.2 2.6-2.6 3.8-3.9 1.2-1.2 1.6-2.4 2.4-4 .8-1.6 .4-3 .1-4.7-.3-1.6-2.4-5.8-3.4-8.1-1-.8-2-1.7-2.6-2.2-.6-.5-1.3-.9-2.2-.9-1 0-1.6-.2-2.6-.2-1 0-2.6.4-3.8 1.9-1.2 1.5-4.6 4.5-5.6 5.8-1 1.3-2 2.4-.8 4 1.2 1.6 4.5 7 5.6 8.3 1.1 1.2 2.1 1.3 3.4 .8 1.2-.5 7.8-3.2 9.4-4 1.6-.8 3.2-.2 4.4 1 1.2 1.2 4 11.2 4 12.6 0 1.4-1.2 2.6-2.4 3.8-1.2 1.2-2.6 1.3-3.8 .5z"/></svg>
+                        +972568401548
+                    </a>
+                </div>
+
+                <!-- Social Media Column -->
+                <div class="footer-column lg:col-span-1 md:col-span-3">
+                    <h4>تابعنا</h4>
+                    <div class="flex justify-center md:justify-start space-x-4 space-x-reverse mt-4">
+                        <a href="https://www.facebook.com/yazanabokaheal0" target="_blank" class="social-icon">
+                            <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 12c0-5.52-4.48-10-2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/yazan.abokaheal/" target="_blank" class="social-icon">
+                            <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm-.2 2A2.88 2.88 0 005 6.88V16.12A2.88 2.88 0 007.88 19h8.24A2.88 2.88 0 0019 16.12V7.88A2.88 2.88 0 0016.12 5H7.8zm9.33 1.2A1.2 1.2 0 1116.12 6.8a1.2 1.2 0 011.01-1.6zm-3.1 3.51a4.52 4.52 0 110 9.04 4.52 4.52 0 010-9.04zm-.01 2.5a2.01 2.01 0 100 4.02 2.01 2.01 0 000-4.02z"/></svg>
+                        </a>
+                        <a href="https://t.me/yazanxosaid" target="_blank" class="social-icon">
+                            <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.3 5.34l-1.66 8.01-1.63 7.86c-.19.92-.74 1.15-1.51.68l-4.17-3.07-2.01 1.93c-.23.23-.42.44-.8.44-.57 0-.76-.23-.87-.44L3 12.3c-.24-.91.56-1.57 1.77-1.12l13.72-5.34c.82-.3 1.58-.04 1.4.92z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="copyright text-center">
+                &copy; <span id="current-year"></span> منصة إتقان. جميع الحقوق محفوظة.
+                <p class="mt-1">صمم بواسطة <span class="font-bold">يزن أبو كحيل</span>.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+    <script>
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختر جامعتك - منصة إتقان</title>
+    <!-- Tailwind CSS CDN for a unified look -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- CSS للكاردز والتصميم -->
+    <style>
+        /* تحسينات الهيدر */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-container img {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .platform-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* قائمة التنقل */
+        .desktop-nav {
+            display: none;
+        }
+        
+        @media (min-width: 768px) {
+            .desktop-nav {
+                display: flex !important;
+            }
+        }
+        
+        .desktop-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .desktop-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .desktop-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* University Cards */
+        .university-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        
+        .university-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-university-card {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        
+        .add-university-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .university-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-[#f0f4f8] text-[#1a202c]">
+    <!-- شريط تقدم للقراءة -->
+    <div class="reading-progress">
+        <div class="progress-bar"></div>
+    </div>
+
+    <!-- خلفية القائمة المحمولة -->
+    <div id="mobile-overlay" class="mobile-overlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto header-container">
+            <!-- Platform Logo and Name -->
+            <div class="logo-container">
+                <a href="index2.html" class="logo-container">
+                    <div class="animated-logo relative">
+                        <div class="logo-glow"></div>
+                        <div class="logo-particles">
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                        </div>
+                        <img src="photo/logo.png" alt="شعار منصة إتقان">
+                    </div>
+                    <h1 class="platform-title">منصة إتقان</h1>
+                </a>
+            </div>
+
+            <!-- القائمة الرئيسية للكمبيوتر -->
+            <nav class="desktop-nav md:flex flex-1 justify-center" style="display: flex;">
+                <ul>
+                    <li><a href="index2.html">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        الصفحة الرئيسية
+                    </a></li>
+                    <li><a href="index2.html#student-tools">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                        أدوات الطالب
+                    </a></li>
+                    <li><a href="services.html">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        خدماتنا المجانية والمدفوعة
+                    </a></li>
+                    <li><a href="choose-university.html" class="bg-white/20">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+                        اختر جامعتك
+                    </a></li>
+                    <li><a href="qou11.html">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        اختر تخصصك الأكاديمي
+                    </a></li>
+                    <li><a href="us.html">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.37-2 1l-3.72 5.58L8.54 8H6c-.8 0-1.54.37-2 1L1.46 16H4v6h2v-6h2.5l1.22-1.22L11.5 16H14v6h2zm-7.5-10.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10.5s.67 1.5 1.5 1.5zM7 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2z"/></svg>
+                        فريق المنصة
+                    </a></li>
+                </ul>
+            </nav>
+
+            <!-- تلجرام والهامبرغر -->
+            <div class="flex items-center gap-4">
+                <!-- تلجرام -->
+                <a href="https://t.me/yazanxosaid" target="_blank" class="telegram-button">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+                    </svg>
+                    <span class="hidden sm:inline">تلجرام</span>
+                </a>
+
+                <!-- Burger Menu for Mobile -->
+                <div class="md:hidden">
+                    <label class="burger" for="burger">
+                        <input type="checkbox" id="burger" onchange="toggleMobileMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- قائمة الهاتف المحمول -->
+    <nav id="mobile-menu" class="mobile-menu">
+        <a href="index2.html">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            الصفحة الرئيسية
+        </a>
+        <a href="index2.html#student-tools">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+            أدوات الطالب
+        </a>
+        <a href="services.html">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            خدماتنا المجانية والمدفوعة
+        </a>
+        <a href="choose-university.html" class="bg-white/20">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+            اختر جامعتك
+        </a>
+        <a href="qou11.html">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            اختر تخصصك الأكاديمي
+        </a>
+        <a href="us.html">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.37-2 1l-3.72 5.58L8.54 8H6c-.8 0-1.54.37-2 1L1.46 16H4v6h2v-6h2.5l1.22-1.22L11.5 16H14v6h2zm-7.5-10.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10.5s.67 1.5 1.5 1.5zM7 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2z"/></svg>
+            فريق المنصة
+        </a>
+        <a href="https://t.me/yazanxosaid" target="_blank">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+            </svg>
+            تلجرام
+        </a>
+    </nav>
+
+    <!-- قسم اختيار الجامعة -->
+    <section class="bg-gradient-to-br from-blue-500 to-indigo-100 py-16 min-h-screen">
+        <div class="container mx-auto px-4">
+            <!-- العنوان والوصف -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">اختر جامعتك</h1>
+                <p class="text-xl text-blue-100 max-w-2xl mx-auto">اختر الجامعة التي تدرس بها للحصول على خدمات مخصصة وأدوات تعليمية متقدمة تناسب احتياجاتك الأكاديمية</p>
+            </div>
+
+            <!-- الكاردز -->
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- كارد جامعة القدس المفتوحة -->
+                <div class="university-card" onclick="window.location.href='qou11.html'">
+                    <img src="photo/QOU.jpg" alt="جامعة القدس المفتوحة" class="university-logo">
+                    <h3 class="text-2xl font-bold mb-4">جامعة القدس المفتوحة</h3>
+                    <p class="text-blue-100 mb-6">الجامعة الرائدة في التعليم المفتوح والتعلم الإلكتروني في فلسطين</p>
+                    <div class="bg-white/20 rounded-lg p-4">
+                        <p class="text-sm">✓ أدوات حساب المعدل</p>
+                        <p class="text-sm">✓ جداول الامتحانات</p>
+                        <p class="text-sm">✓ التخصصات المتاحة</p>
+                        <p class="text-sm">✓ خدمات أكاديمية متخصصة</p>
+                    </div>
+                </div>
+
+                <!-- كارد إضافة جامعة جديدة -->
+                <div class="add-university-card" onclick="window.open('https://wa.me/972568401548?text=أريد إضافة جامعتي إلى منصة إتقان', '_blank')">
+                    <div class="text-6xl mb-6">➕</div>
+                    <h3 class="text-2xl font-bold mb-4">هل تريد إضافة جامعتك؟</h3>
+                    <p class="text-green-100 mb-6">تواصل معنا لإضافة جامعتك وخدماتها المتخصصة إلى منصة إتقان</p>
+                    <div class="bg-white/20 rounded-lg p-4">
+                        <p class="text-sm">📱 تواصل عبر الواتساب</p>
+                        <p class="text-sm">🏫 إضافة جامعتك</p>
+                        <p class="text-sm">🛠️ خدمات مخصصة</p>
+                        <p class="text-sm">⚡ استجابة سريعة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compact Footer -->
+    <footer class="bg-[#004b93] text-white py-6">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <!-- Platform Info -->
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <img src="photo/logo.png" alt="منصة إتقان" class="w-8 h-8 rounded-full">
+                    <div>
+                        <h3 class="text-base font-bold">منصة إتقان</h3>
+                        <p class="text-blue-200 text-xs">أداة الطالب الشاملة</p>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="text-center">
+                    <p class="text-blue-100 text-sm mb-1">فلسطين - جنين</p>
+                    <div class="flex items-center justify-center space-x-4 space-x-reverse text-sm">
+                        <a href="mailto:yazanabokaheal@gmail.com" class="text-blue-200 hover:text-white transition-colors">
+                            yazanabokaheal@gmail.com
+                        </a>
+                        <span class="text-blue-300">|</span>
+                        <a href="https://wa.me/972568401548" target="_blank" class="text-blue-200 hover:text-green-300 transition-colors">
+                            +972568401548
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Social Media -->
+                <div class="flex space-x-3 space-x-reverse">
+                    <a href="https://www.facebook.com/yazanabokaheal0" target="_blank" class="text-blue-200 hover:text-white transition-colors">
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/yazan.abokaheal/" target="_blank" class="text-blue-200 hover:text-white transition-colors">
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987c6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323C6.001 8.198 7.152 7.708 8.449 7.708s2.448.49 3.323 1.416c.875.926 1.365 2.077 1.365 3.374s-.49 2.448-1.365 3.323c-.875.875-2.026 1.167-3.323 1.167zm7.718 0c-1.297 0-2.448-.49-3.323-1.297-.875-.926-1.365-2.077-1.365-3.374s.49-2.448 1.365-3.323c.875-.926 2.026-1.416 3.323-1.416s2.448.49 3.323 1.416c.875.926 1.365 2.077 1.365 3.374s-.49 2.448-1.365 3.323c-.875.875-2.026 1.167-3.323 1.167z"/></svg>
+                    </a>
+                    <a href="https://t.me/yazanxosaid" target="_blank" class="text-blue-200 hover:text-white transition-colors">
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="border-t border-blue-600 mt-4 pt-3 text-center">
+                <p class="text-blue-200 text-xs">
+                    © <span id="current-year">2025</span> منصة إتقان. جميع الحقوق محفوظة - صمم بواسطة <span class="text-yellow-300 font-semibold">يزن أبو كحيل</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Functions -->
+    <script>
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-overlay');
+            const burger = document.getElementById('burger');
+            
+            if (burger.checked) {
+                mobileMenu.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-overlay');
+            const burger = document.getElementById('burger');
+            
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            burger.checked = false;
+        }
+    </script>
+</body>
+</html>

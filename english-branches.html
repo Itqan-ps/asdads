@@ -1,0 +1,822 @@
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروع الأدب الإنجليزي - منصة إتقان</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* خلفية متحركة */
+        .animated-background {
+            background: linear-gradient(180deg, #1e3a8a, #1e40af, #1e293b, #0f172a, #020617);
+            background-size: 100% 200%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        
+        /* جسيمات متحركة */
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        .particle:nth-child(1) { width: 20px; height: 20px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 15px; height: 15px; left: 20%; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 25px; height: 25px; left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 18px; height: 18px; left: 40%; animation-delay: 6s; }
+        .particle:nth-child(5) { width: 22px; height: 22px; left: 50%; animation-delay: 8s; }
+        .particle:nth-child(6) { width: 16px; height: 16px; left: 60%; animation-delay: 10s; }
+        .particle:nth-child(7) { width: 24px; height: 24px; left: 70%; animation-delay: 12s; }
+        .particle:nth-child(8) { width: 19px; height: 19px; left: 80%; animation-delay: 14s; }
+        .particle:nth-child(9) { width: 21px; height: 21px; left: 90%; animation-delay: 16s; }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* كاردز زجاجية */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .glass-card:hover::before {
+            left: 100%;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* ألوان مختلفة للفروع */
+        .literature-card {
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(30, 64, 175, 0.2));
+        }
+        
+        .education-card {
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+        }
+        
+        .translation-card {
+            border: 2px solid rgba(245, 158, 11, 0.3);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.2));
+        }
+        
+        /* تأثيرات الظهور */
+        .fade-in {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* تصميم المستويات */
+        .level-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .level-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .level-1 { border-left: 4px solid #3b82f6; }
+        .level-2 { border-left: 4px solid #10b981; }
+        .level-3 { border-left: 4px solid #f59e0b; }
+        .level-4 { border-left: 4px solid #ef4444; }
+        
+        /* إخفاء وإظهار الأقسام */
+        .hidden { display: none; }
+        .show { display: block; animation: fadeInUp 0.5s ease-out; }
+        
+        /* أزرات العودة */
+        .back-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            border: none;
+            border-radius: 15px;
+            padding: 12px 30px;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- خلفية متحركة -->
+    <div class="animated-background">
+        <!-- جسيمات متحركة -->
+        <div class="floating-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
+        <!-- الهيدر من الصفحة الرئيسية -->
+        <header class="bg-[#004b93] text-white py-6 shadow-md">
+            <div class="container mx-auto px-6 flex justify-between items-center flex-wrap">
+                <!-- Platform Logo and Name -->
+                <div class="flex items-center space-x-4 space-x-reverse mb-4 md:mb-0 order-1">
+                    <a href="index.html" class="logo-container">
+                        <div class="animated-logo relative">
+                            <img src="photo/logo.png" alt="شعار منصة إتقان" class="w-12 h-12 rounded-full border-2 border-white shadow-lg">
+                        </div>
+                        <h1 class="platform-title text-xl font-bold">منصة إتقان</h1>
+                    </a>
+                </div>
+
+                <!-- القائمة الرئيسية -->
+                <nav class="flex items-center justify-center flex-1 order-2">
+                    <ul class="flex flex-wrap justify-center space-x-6 space-x-reverse">
+                        <li><a href="index.html" class="hover:text-gray-300 flex items-center">
+                            <svg class="h-5 w-5 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                            الصفحة الرئيسية
+                        </a></li>
+                        <li><a href="qou11.html" class="hover:text-gray-300 flex items-center">
+                            <svg class="h-5 w-5 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.6c-4.43 0-8 3.57-8 8s3.57 8 8 8c1.39 0 2.73-.39 3.86-1.07l3.65 3.65c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-3.65-3.65A7.95 7.95 0 0020 10.6c0-4.43-3.57-8-8-8zm-5.4 7.2c0-3 2.45-5.45 5.45-5.45s5.45 2.45 5.45 5.45-2.45 5.45-5.45 5.45-5.45-2.45-5.45-5.45z"/></svg>
+                            التخصصات الجامعية
+                        </a></li>
+                    </ul>
+                </nav>
+
+                <!-- تلجرام واتصل بنا -->
+                <div class="flex items-center space-x-4 space-x-reverse mb-4 md:mb-0 order-3">
+                    <a href="https://t.me/yazanxosaid" target="_blank" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors">
+                        تلجرام
+                    </a>
+                    <a href="https://wa.me/972568401548" target="_blank" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg transition-colors">
+                        واتساب
+                    </a>
+                </div>
+            </div>
+        </header>
+        
+        <!-- المحتوى الرئيسي -->
+        <main class="container mx-auto px-6 py-12 relative z-10">
+            <!-- قسم اختيار الفرع -->
+            <div id="branch-selection" class="show">
+                <!-- عنوان القسم -->
+                <div class="text-center mb-16 fade-in">
+                    <div class="inline-block bg-white bg-opacity-20 backdrop-blur-md rounded-full px-6 py-2 mb-6">
+                        <span class="text-white text-sm font-medium">🎓 تخصص الأدب الإنجليزي</span>
+                    </div>
+                    <h2 class="text-4xl font-bold text-white mb-4">اختر الفرع المناسب</h2>
+                    <p class="text-white text-lg opacity-90">
+                        اختر الفرع الذي يناسب اهتماماتك وأهدافك المهنية
+                    </p>
+                </div>
+                
+                <!-- كاردز الفروع -->
+                <div class="flex flex-wrap justify-center items-stretch gap-6 max-w-7xl mx-auto">
+                    <!-- كارد الأدب الإنجليزي -->
+                    <div class="glass-card literature-card p-6 fade-in flex-1 min-w-[300px] max-w-[350px]" onclick="showLevels('literature')">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden border-2 border-blue-300">
+                                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                     alt="English Literature" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2">الأدب الإنجليزي</h3>
+                            <p class="text-blue-100 text-sm">English Literature</p>
+                        </div>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <h4 class="text-white font-semibold mb-2">📚 المواد الأساسية</h4>
+                                <ul class="text-blue-100 text-sm space-y-1">
+                                    <li>• الشعر الإنجليزي</li>
+                                    <li>• الرواية الإنجليزية</li>
+                                    <li>• المسرح الإنجليزي</li>
+                                    <li>• النقد الأدبي</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="bg-blue-500 bg-opacity-30 rounded-lg p-3">
+                                <div class="text-2xl font-bold text-white">30</div>
+                                <div class="text-sm text-blue-100">مادة أساسية</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- كارد فرعي التربية -->
+                    <div class="glass-card education-card p-6 fade-in flex-1 min-w-[300px] max-w-[350px]" style="animation-delay: 0.2s;" onclick="showLevels('education')">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden border-2 border-green-300">
+                                <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                     alt="Education" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2">فرعي التربية</h3>
+                            <p class="text-green-100 text-sm">Education Branch</p>
+                        </div>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <h4 class="text-white font-semibold mb-2">🎓 المواد التربوية</h4>
+                                <ul class="text-green-100 text-sm space-y-1">
+                                    <li>• طرق تدريس اللغة الإنجليزية</li>
+                                    <li>• علم النفس التربوي</li>
+                                    <li>• تقنيات التعليم</li>
+                                    <li>• إدارة الصف</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="bg-green-500 bg-opacity-30 rounded-lg p-3">
+                                <div class="text-2xl font-bold text-white">11</div>
+                                <div class="text-sm text-green-100">مادة تربوية</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- كارد فرعي الترجمة -->
+                    <div class="glass-card translation-card p-6 fade-in flex-1 min-w-[300px] max-w-[350px]" style="animation-delay: 0.4s;" onclick="showLevels('translation')">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden border-2 border-yellow-300">
+                                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                     alt="Translation" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2">فرعي الترجمة</h3>
+                            <p class="text-yellow-100 text-sm">Translation Branch</p>
+                        </div>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <h4 class="text-white font-semibold mb-2">🌐 مواد الترجمة</h4>
+                                <ul class="text-yellow-100 text-sm space-y-1">
+                                    <li>• نظريات الترجمة</li>
+                                    <li>• الترجمة التحريرية</li>
+                                    <li>• الترجمة الفورية</li>
+                                    <li>• الترجمة المتخصصة</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="bg-yellow-500 bg-opacity-30 rounded-lg p-3">
+                                <div class="text-2xl font-bold text-white">11</div>
+                                <div class="text-sm text-yellow-100">مادة ترجمة</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قسم عرض المستويات -->
+            <div id="levels-section" class="hidden">
+                <!-- زر العودة -->
+                <div class="mb-8">
+                    <button onclick="showBranchSelection()" class="back-btn">
+                        <i class="fas fa-arrow-right ml-2"></i>
+                        العودة لاختيار الفرع
+                    </button>
+                </div>
+                
+                <!-- عنوان الفرع المختار -->
+                <div class="text-center mb-12">
+                    <h2 id="branch-title" class="text-4xl font-bold text-white mb-4"></h2>
+                    <p class="text-white text-lg opacity-90">المواد مقسمة حسب المستويات الأكاديمية</p>
+                </div>
+                
+                <!-- المستويات الأربعة -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                    <!-- المستوى الأول -->
+                    <div class="level-card level-1 p-6">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 mx-auto mb-3 bg-blue-500 rounded-full flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">1</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">المستوى الأول</h3>
+                            <p class="text-blue-100 text-sm">Level One</p>
+                        </div>
+                        
+                        <div class="space-y-2" id="level-1-subjects">
+                            <!-- سيتم ملء المواد بالجافا سكريبت -->
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                            <div class="bg-blue-500 bg-opacity-30 rounded-lg p-2">
+                                <div class="text-lg font-bold text-white" id="level-1-count">0</div>
+                                <div class="text-xs text-blue-100">مادة</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- المستوى الثاني -->
+                    <div class="level-card level-2 p-6">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 mx-auto mb-3 bg-green-500 rounded-full flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">2</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">المستوى الثاني</h3>
+                            <p class="text-green-100 text-sm">Level Two</p>
+                        </div>
+                        
+                        <div class="space-y-2" id="level-2-subjects">
+                            <!-- سيتم ملء المواد بالجافا سكريبت -->
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                            <div class="bg-green-500 bg-opacity-30 rounded-lg p-2">
+                                <div class="text-lg font-bold text-white" id="level-2-count">0</div>
+                                <div class="text-xs text-green-100">مادة</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- المستوى الثالث -->
+                    <div class="level-card level-3 p-6">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 mx-auto mb-3 bg-yellow-500 rounded-full flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">3</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">المستوى الثالث</h3>
+                            <p class="text-yellow-100 text-sm">Level Three</p>
+                        </div>
+                        
+                        <div class="space-y-2" id="level-3-subjects">
+                            <!-- سيتم ملء المواد بالجافا سكريبت -->
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                            <div class="bg-yellow-500 bg-opacity-30 rounded-lg p-2">
+                                <div class="text-lg font-bold text-white" id="level-3-count">0</div>
+                                <div class="text-xs text-yellow-100">مادة</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- المستوى الرابع -->
+                    <div class="level-card level-4 p-6">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 mx-auto mb-3 bg-red-500 rounded-full flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">4</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">المستوى الرابع</h3>
+                            <p class="text-red-100 text-sm">Level Four</p>
+                        </div>
+                        
+                        <div class="space-y-2" id="level-4-subjects">
+                            <!-- سيتم ملء المواد بالجافا سكريبت -->
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                            <div class="bg-red-500 bg-opacity-30 rounded-lg p-2">
+                                <div class="text-lg font-bold text-white" id="level-4-count">0</div>
+                                <div class="text-xs text-red-100">مادة</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- النافذة المنبثقة لمعلومات المادة -->
+    <div id="subjectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all duration-300 scale-95 hover:scale-100">
+            <!-- رأس النافذة -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-t-2xl p-6 text-center relative">
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <div class="w-16 h-16 mx-auto mb-4 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <h3 id="modalSubjectName" class="text-2xl font-bold text-white mb-2"></h3>
+                <p id="modalSubjectCode" class="text-blue-100 font-semibold"></p>
+            </div>
+            
+            <!-- محتوى النافذة -->
+            <div class="p-6 space-y-4">
+                <!-- ساعات المادة -->
+                <div class="bg-white bg-opacity-10 rounded-lg p-4 text-center">
+                    <div class="flex items-center justify-center mb-2">
+                        <svg class="w-5 h-5 text-yellow-400 ml-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span id="modalSubjectHours" class="text-white font-semibold"></span>
+                    </div>
+                </div>
+                
+                <!-- وصف المادة -->
+                <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                    <h4 class="text-white font-semibold mb-2 flex items-center">
+                        <svg class="w-5 h-5 text-blue-400 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        وصف المادة
+                    </h4>
+                    <p id="modalSubjectDescription" class="text-gray-300 text-sm leading-relaxed"></p>
+                </div>
+                
+                <!-- المتطلبات السابقة -->
+                <div id="modalPrerequisites" class="bg-yellow-500 bg-opacity-20 rounded-lg p-4" style="display: none;">
+                    <h4 class="text-yellow-300 font-semibold mb-2 flex items-center">
+                        <svg class="w-5 h-5 text-yellow-400 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        المتطلبات السابقة
+                    </h4>
+                    <p id="modalPrerequisitesText" class="text-yellow-100 text-sm"></p>
+                </div>
+                
+                <!-- زر الحصول على الملفات -->
+                <div class="pt-4">
+                    <button id="getFilesBtn" onclick="openDriveLink()" class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 space-x-reverse">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                       <span>احصل على ملفات المادة</span>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر من الصفحة الرئيسية -->
+    <footer class="footer-section">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center md:text-right">
+            <!-- About Us Column -->
+            <div class="footer-column">
+                <h4>عن منصة إتقان</h4>
+                <p class="text-sm leading-relaxed text-blue-100">
+                    منصة إتقان هي رفيقك الأكاديمي الشامل، مخصصة لطلاب اللغة الإنجليزية، نقدم أدوات وموارد لمساعدتك على التفوق في دراستك الجامعية.
+                </p>
+            </div>
+            
+            <!-- Quick Links Column -->
+            <div class="footer-column">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="index.html" class="hover:text-white hover:translate-x-1">الصفحة الرئيسية</a></li>
+                    <li><a href="qou11.html" class="hover:text-white hover:translate-x-1">التخصصات الجامعية</a></li>
+                    <li><a href="https://t.me/yazanxosaid" target="_blank" class="hover:text-white hover:translate-x-1">تيليجرام</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info Column -->
+            <div class="footer-column">
+                <h4>تواصل معنا</h4>
+                <p class="text-sm text-blue-100 mb-2">فلسطين. جنين</p>
+                <a href="mailto:yazanabokaheal@gmail.com" class="flex items-center justify-center md:justify-end text-blue-100 hover:text-white transition-colors mb-2">
+                    <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    yazanabokaheal@gmail.com
+                </a>
+                <a href="https://wa.me/972568401548" target="_blank" class="flex items-center justify-center md:justify-end text-blue-100 hover:text-green-300 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-5 w-5 fill-current ml-2"><path d="M380.9 97.1C339.4 55.4 283.4 32 224.2 32c-97.1 0-176 78.9-176 176c0 36.3 11 70.3 32.2 99.4L32 480l105.4-29.6c27.1 14.9 57.3 23.6 88.8 23.6c97.1 0 176-78.9 176-176c0-59.2-23.4-115.2-64.9-156.9zM224.2 448c-30.8 0-60.9-8.8-87.8-25.2L74.8 448l18.4-64.3c-21.6-32.6-34.7-72.2-34.7-113.7c0-85.3 69.2-154.5 154.5-154.5c41.3 0 79.9 16.1 109.1 45.3c29.1 29.1 45.3 67.7 45.3 109.1c0 85.3-69.2 154.5-154.5 154.5z"/></svg>
+                    +972568401548
+                </a>
+            </div>
+
+            <!-- Social Media Column -->
+            <div class="footer-column lg:col-span-1 md:col-span-3">
+                <h4>تابعنا</h4>
+                <div class="flex justify-center md:justify-start space-x-4 space-x-reverse mt-4">
+                    <a href="https://www.facebook.com/yazanabokaheal0" target="_blank" class="social-icon">
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.97 3.65 9.13 8.44 9.8V15.4H7.9V12h2.54V9.6c0-2.5 1.5-3.87 3.75-3.87 1.05 0 2.06.19 2.06.19v2.27h-1.17c-1.13 0-1.49.7-1.49 1.42V12h2.89l-.47 3.4h-2.42V21.8C18.35 21.13 22 16.97 22 12z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/yazan.abokaheal/" target="_blank" class="social-icon">
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2z"/></svg>
+                    </a>
+                    <a href="https://t.me/yazanxosaid" target="_blank" class="social-icon">
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M18.3 5.34l-1.66 8.01-1.63 7.86c-.19.92-.74 1.15-1.51.68l-4.17-3.07-2.01 1.93c-.23.23-.42.44-.8.44-.57 0-.76-.23-.87-.44L3 12.3c-.24-.91.56-1.57 1.77-1.12l13.72-5.34c.82-.3 1.58-.04 1.4.92z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="copyright text-center">
+            &copy; <span id="current-year">2024</span> منصة إتقان. جميع الحقوق محفوظة.
+            <p class="mt-1">صمم بواسطة <span class="font-bold">يزن أبو كحيل</span>.</p>
+        </div>
+    </footer>
+    
+    <!-- Font Awesome للأيقونات -->
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    
+    <!-- JavaScript للتفاعل -->
+    <script>
+        // متغير لحفظ رابط الدرايف الحالي
+        let currentDriveLink = '';
+        
+        // دالة فتح رابط الدرايف
+        function openDriveLink() {
+            if (currentDriveLink && currentDriveLink !== '#') {
+                window.open(currentDriveLink, '_blank');
+            } else {
+                alert('رابط الملفات غير متوفر حالياً');
+            }
+        }
+        
+        // بيانات المواد لكل فرع ومستوى
+        const coursesData = {
+            literature: {
+                title: "الأدب الإنجليزي",
+                levels: {
+                    1: [
+                        { code: "8150", name: "Reading (I)", hours: 3, description: "مقدمة في مهارات القراءة والفهم باللغة الإنجليزية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8250", name: "English Language Study Skills", hours: 3, description: "تطوير مهارات الدراسة باللغة الإنجليزية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8153", name: "Language Use", hours: 3, description: "استخدام اللغة الإنجليزية في السياقات المختلفة", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "0114", name: "اللغة الإنجليزية (2)", hours: 3, description: "تطوير المهارات الأساسية في اللغة الإنجليزية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8256", name: "English Proficiency (1)", hours: 3, description: "تطوير الكفاءة في اللغة الإنجليزية - المستوى الأول", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ],
+                    2: [
+                        { code: "8251", name: "Reading (II)", hours: 3, description: "تطوير مهارات القراءة المتقدمة", prerequisites: "8150", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8252", name: "Structure (I)", hours: 3, description: "قواعد اللغة الإنجليزية الأساسية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8253", name: "Writing (I)", hours: 3, description: "مهارات الكتابة الأساسية باللغة الإنجليزية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8254", name: "Vocabulary", hours: 3, description: "تطوير المفردات الإنجليزية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8255", name: "Listening Skills", hours: 3, description: "تطوير مهارات الاستماع", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8259", name: "Communication Skills", hours: 3, description: "مهارات التواصل باللغة الإنجليزية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8353", name: "English Proficiency (2)", hours: 3, description: "تطوير الكفاءة في اللغة الإنجليزية - المستوى الثاني", prerequisites: "8256", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ],
+                    3: [
+                        { code: "8258", name: "Phonetics & Pronunciation", hours: 3, description: "علم الأصوات والنطق", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8356", name: "Writing (II)", hours: 3, description: "مهارات الكتابة المتقدمة", prerequisites: "8253", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8355", name: "Literature (II): A Survey of English Lit.", hours: 3, description: "مسح الأدب الإنجليزي", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8354", name: "Structure (II)", hours: 3, description: "قواعد اللغة الإنجليزية المتقدمة", prerequisites: "8252", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8351", name: "Introduction to Linguistics", hours: 3, description: "مقدمة في علم اللغة", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8352", name: "Literature (I): Literary Appreciation", hours: 3, description: "تذوق الأدب", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8452", name: "Translation (I)", hours: 3, description: "مقدمة في الترجمة", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8359", name: "Modern Short Fiction", hours: 3, description: "القصة القصيرة الحديثة", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8357", name: "English for Specific Purposes", hours: 3, description: "الإنجليزية للأغراض الخاصة", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8358", name: "Romantic Literature", hours: 3, description: "الأدب الرومانسي", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ],
+                    4: [
+                        { code: "8459", name: "Discourse Analysis", hours: 3, description: "تحليل الخطاب", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8499", name: "مشروع التخرج", hours: 3, description: "المشروع النهائي للتخرج", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8458", name: "Applied Linguistics", hours: 3, description: "علم اللغة التطبيقي", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8455", name: "Twentieth Century American Literature", hours: 3, description: "الأدب الأمريكي في القرن العشرين", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8453", name: "Translation (II)", hours: 3, description: "الترجمة المتقدمة", prerequisites: "8452", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8451", name: "Literature (III): The English Novel", hours: 3, description: "الرواية الإنجليزية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8340", name: "مناهج البحث الأدبي واللغوي", hours: 3, description: "مناهج البحث في الأدب واللغة", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8454", name: "Literature (IV): Drama", hours: 3, description: "الأدب المسرحي", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8457", name: "Modern Literary Criticism", hours: 3, description: "النقد الأدبي الحديث", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ]
+                }
+            },
+            education: {
+                title: "🎓 تخصص التربية",
+                levels: {
+                    1: [
+                        { code: "5103", name: "المناهج التربوي", hours: 3, description: "أسس المناهج التربوية وتطويرها", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "5114", name: "علم النفس التربوي", hours: 3, description: "علم النفس في التعليم والتعلم", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ],
+                    2: [
+                        { code: "5204", name: "طرائق التدريس والتدريب العامة", hours: 3, description: "طرق التدريس الحديثة والفعالة", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ],
+                    3: [
+                        { code: "5300", name: "تكنولوجيا التعليم", hours: 3, description: "استخدام التكنولوجيا في التعليم", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "5301", name: "إدارة الصف وتنظيمه", hours: 3, description: "إدارة الصف الدراسي بفعالية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "5320", name: "القياس والتقويم في التعلم والتعليم", hours: 3, description: "أساليب القياس والتقويم التربوي", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "5353", name: "E.L.T Methodology (1)", hours: 3, description: "منهجية تدريس اللغة الإنجليزية - الجزء الأول", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ],
+                    4: [
+                        { code: "5420", name: "تربية عملية (1)", hours: 3, description: "التدريب العملي في التدريس - الجزء الأول", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "5425", name: "تربية عملية (2)", hours: 3, description: "التدريب العملي في التدريس - الجزء الثاني", prerequisites: "5420", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "5450", name: "E.L.T Methodology (2)", hours: 3, description: "منهجية تدريس اللغة الإنجليزية - الجزء الثاني", prerequisites: "5353", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ]
+                }
+            },
+            translation: {
+                title: "🌐 تخصص الترجمة",
+                levels: {
+                    1: [
+                        { code: "8260", name: "Introduction to Translation", hours: 3, description: "مقدمة في علم الترجمة ونظرياتها", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ],
+                    2: [
+                        { code: "8261", name: "Media and Political Translation", hours: 3, description: "ترجمة النصوص الإعلامية والسياسية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8262", name: "Legal Translation", hours: 3, description: "ترجمة النصوص القانونية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8263", name: "Scientific and Technical Translation", hours: 3, description: "ترجمة النصوص العلمية والتقنية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ],
+                    3: [
+                        { code: "8363", name: "Business and Economic Translation", hours: 3, description: "ترجمة النصوص التجارية والاقتصادية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8364", name: "Literary and Religious Translation", hours: 3, description: "ترجمة النصوص الأدبية والدينية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8365", name: "Critical Writing & Criticism in Translation", hours: 3, description: "الكتابة النقدية في الترجمة", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8366", name: "Interpreting (Simultaneous, Whispering, Consecutive)", hours: 3, description: "الترجمة الفورية بأنواعها", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ],
+                    4: [
+                        { code: "8463", name: "Editing and Proofreading", hours: 3, description: "التحرير والتدقيق اللغوي", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8464", name: "Audiovisual Translation", hours: 3, description: "ترجمة المواد السمعية والبصرية", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" },
+                        { code: "8465", name: "Modern Translation Technologies", hours: 3, description: "تقنيات الترجمة الحديثة", driveLink: "https://drive.google.com/drive/u/3/folders/1MVw5pf2e-zOtq51KimqrzuW2IgvssE0V" }
+                    ]
+                }
+            }
+        };
+        function showBranchSelection() {
+            document.getElementById('branch-selection').classList.remove('hidden');
+            document.getElementById('branch-selection').classList.add('show');
+            document.getElementById('levels-section').classList.add('hidden');
+            document.getElementById('levels-section').classList.remove('show');
+        }
+        
+        // إظهار المستويات للفرع المختار
+        function showLevels(branch) {
+            const branchData = coursesData[branch];
+            if (!branchData) return;
+            
+            // إخفاء قسم اختيار الفرع
+            document.getElementById('branch-selection').classList.add('hidden');
+            document.getElementById('branch-selection').classList.remove('show');
+            
+            // إظهار قسم المستويات
+            document.getElementById('levels-section').classList.remove('hidden');
+            document.getElementById('levels-section').classList.add('show');
+            
+            // تحديث عنوان الفرع
+            document.getElementById('branch-title').textContent = branchData.title;
+            
+            // ملء المواد لكل مستوى
+            for (let level = 1; level <= 4; level++) {
+                const subjects = branchData.levels[level] || [];
+                const container = document.getElementById(`level-${level}-subjects`);
+                const countElement = document.getElementById(`level-${level}-count`);
+                
+                // مسح المحتوى السابق
+                container.innerHTML = '';
+                
+                // إضافة المواد
+                subjects.forEach(subject => {
+                    const subjectDiv = document.createElement('div');
+                    subjectDiv.className = 'subject-card bg-white bg-opacity-10 rounded-lg p-2 hover:bg-opacity-20 transition-all cursor-pointer';
+                    subjectDiv.innerHTML = `
+                        <div class="text-white font-semibold text-sm">${subject.name}</div>
+                        <div class="text-gray-300 text-xs">(${subject.code}) - ${subject.hours} ساعات</div>
+                    `;
+                    subjectDiv.onclick = () => showSubjectModal(subject);
+                    container.appendChild(subjectDiv);
+                });
+                
+                // تحديث عدد المواد
+                countElement.textContent = subjects.length;
+            }
+        }
+        
+        // إظهار النافذة المنبثقة لمعلومات المادة
+        function showSubjectModal(subject) {
+            document.getElementById('modalSubjectName').textContent = subject.name;
+            document.getElementById('modalSubjectCode').textContent = `(${subject.code})`;
+            document.getElementById('modalSubjectHours').textContent = `${subject.hours} ساعات معتمدة`;
+            document.getElementById('modalSubjectDescription').textContent = subject.description;
+            
+            // حفظ رابط الدرايف
+            currentDriveLink = subject.driveLink || '#';
+            
+            // إظهار المتطلبات السابقة إذا وجدت
+            const prerequisitesDiv = document.getElementById('modalPrerequisites');
+            if (subject.prerequisites) {
+                document.getElementById('modalPrerequisitesText').textContent = `متطلب سابق: ${subject.prerequisites}`;
+                prerequisitesDiv.style.display = 'block';
+            } else {
+                prerequisitesDiv.style.display = 'none';
+            }
+            
+            // إظهار النافذة المنبثقة مع التأثير الصحيح
+            const modal = document.getElementById('subjectModal');
+            modal.style.display = 'flex';
+            modal.classList.remove('hidden');
+            
+            // تأثير الظهور
+            setTimeout(() => {
+                modal.querySelector('.bg-gradient-to-br').style.transform = 'scale(1)';
+            }, 10);
+        }
+        
+        // إغلاق النافذة المنبثقة
+        function closeModal() {
+            const modal = document.getElementById('subjectModal');
+            modal.querySelector('.bg-gradient-to-br').style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+                modal.classList.add('hidden');
+            }, 200);
+        }
+        
+        // إغلاق النافذة عند النقر خارجها
+        window.onclick = function(event) {
+            const modal = document.getElementById('subjectModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // تأثيرات الظهور التدريجي
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // مراقبة العناصر للظهور التدريجي
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+        
+        // تحديث السنة الحالية
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
+        

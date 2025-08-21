@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قسم الأدب الإنجليزي - جامعة القدس المفتوحة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* خلفية متحركة بنفس ألوان الصورة */
+        .animated-background {
+            background: linear-gradient(180deg, #1e3a8a, #1e40af, #1e293b, #0f172a, #020617);
+            background-size: 100% 200%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        
+        /* جسيمات متحركة */
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        .particle:nth-child(1) { width: 20px; height: 20px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 15px; height: 15px; left: 20%; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 25px; height: 25px; left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 18px; height: 18px; left: 40%; animation-delay: 6s; }
+        .particle:nth-child(5) { width: 22px; height: 22px; left: 50%; animation-delay: 8s; }
+        .particle:nth-child(6) { width: 16px; height: 16px; left: 60%; animation-delay: 10s; }
+        .particle:nth-child(7) { width: 24px; height: 24px; left: 70%; animation-delay: 12s; }
+        .particle:nth-child(8) { width: 19px; height: 19px; left: 80%; animation-delay: 14s; }
+        .particle:nth-child(9) { width: 21px; height: 21px; left: 90%; animation-delay: 16s; }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* كاردز زجاجية */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .glass-card:hover::before {
+            left: 100%;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* هيدر مميز */
+        .premium-header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* أزرار مميزة */
+        .premium-btn {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            border: none;
+            border-radius: 15px;
+            padding: 12px 30px;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .premium-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .premium-btn:hover::before {
+            left: 100%;
+        }
+        
+        .premium-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .back-btn:hover {
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.4);
+        }
+        
+        /* تأثيرات النص */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* تأثيرات الظهور */
+        .fade-in {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* تأثيرات خاصة للفروع */
+        .branch-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(30, 64, 175, 0.2));
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .branch-card:hover {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(30, 64, 175, 0.3));
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: scale(1.05);
+        }
+        
+        .education-branch {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        
+        .education-branch:hover {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(5, 150, 105, 0.3));
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+        
+        .translation-branch {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.2));
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+        
+        .translation-branch:hover {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.3));
+            border-color: rgba(245, 158, 11, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- خلفية متحركة -->
+    <div class="animated-background">
+        <!-- جسيمات متحركة -->
+        <div class="floating-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
+        <!-- هيدر مميز -->
+        <header class="premium-header py-4 px-6 relative z-10">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <img src="photo/logo.png" alt="شعار المنصة" class="w-12 h-12 rounded-full">
+                    <h1 class="text-white text-xl font-bold glow-text">منصة إتقان</h1>
+                </div>
+                <button onclick="window.location.href='index.html#universities'" class="premium-btn back-btn">
+                    <i class="fas fa-arrow-right ml-2"></i>
+                    العودة لاختيار الجامعة
+                </button>
+            </div>
+        </header>
+        
+        <!-- المحتوى الرئيسي -->
+        <main class="container mx-auto px-6 py-12 relative z-10">
+            <!-- عنوان القسم -->
+            <div class="text-center mb-16 fade-in">
+                <div class="inline-block bg-white bg-opacity-20 backdrop-blur-md rounded-full px-6 py-2 mb-6">
+                    <span class="text-white text-sm font-medium">🎓 جامعة القدس المفتوحة</span>
+                </div>
+                <div class="mt-6 text-white text-lg opacity-90">
+                    <p>اختر تخصصك الأكاديمي وابدأ رحلتك التعليمية المتميزة في جامعة القدس المفتوحة</p>
+                </div>
+            </div>
+            
+            <!-- كاردز التخصصات -->
+            <div class="grid md:grid-cols-2 gap-4 mb-12 max-w-4xl mx-auto">
+                <!-- كارد تخصص الأدب الإنجليزي -->
+                <div class="glass-card p-4 fade-in">
+                    <div class="text-center mb-3">
+                        <div class="w-16 h-16 mx-auto mb-2 rounded-full overflow-hidden border-2 border-white border-opacity-30">
+                            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="English Literature" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">تخصص الأدب الإنجليزي</h3>
+                        <p class="text-blue-100 text-sm">English Literature Department</p>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <!-- فرع التربية -->
+                        <div class="branch-card education-branch p-2 rounded-lg">
+                            <h4 class="text-white font-semibold mb-1 text-sm">🎓 فرع التربية</h4>
+                            <ul class="text-blue-100 text-xs space-y-0.5">
+                                <li>• طرق تدريس اللغة الإنجليزية</li>
+                                <li>• علم النفس التربوي</li>
+                                <li>• تقنيات التعليم الحديثة</li>
+                                <li>• إدارة الصف والتقويم</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- فرع الترجمة -->
+                        <div class="branch-card translation-branch p-2 rounded-lg">
+                            <h4 class="text-white font-semibold mb-1 text-sm">🌐 فرع الترجمة</h4>
+                            <ul class="text-blue-100 text-xs space-y-0.5">
+                                <li>• نظريات الترجمة</li>
+                                <li>• الترجمة التحريرية والفورية</li>
+                                <li>• الترجمة المتخصصة</li>
+                                <li>• تقنيات الترجمة الحديثة</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="flex justify-between text-center">
+                            <div class="bg-white bg-opacity-20 rounded-lg p-2 flex-1 mx-0.5">
+                                <div class="text-lg font-bold text-white">4</div>
+                                <div class="text-xs text-blue-100">مستويات</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-2 flex-1 mx-0.5">
+                                <div class="text-lg font-bold text-white">51</div>
+                                <div class="text-xs text-blue-100">مادة</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-2 flex-1 mx-0.5">
+                                <div class="text-lg font-bold text-white">153</div>
+                                <div class="text-xs text-blue-100">ساعة معتمدة</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="window.location.href='english-branches.html'" class="premium-btn w-full py-2 text-sm font-bold">
+                        اختيار تخصص الأدب الإنجليزي
+                    </button>
+                </div>
+                
+                <!-- كارد إضافة تخصص جديد -->
+                <div class="glass-card p-4 fade-in" style="animation-delay: 0.2s;">
+                    <div class="text-center mb-3">
+                        <div class="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-purple-400 to-pink-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-plus text-lg text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">تخصص جديد</h3>
+                        <p class="text-blue-100 text-sm">New Specialization</p>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="branch-card p-2 rounded-lg">
+                            <h4 class="text-white font-semibold mb-1 text-sm">💡 اطلب إضافة تخصصك</h4>
+                            <p class="text-blue-100 text-xs leading-relaxed">
+                                لا تجد التخصص الذي تبحث عنه؟ تواصل معنا عبر الواتساب وسنقوم بإضافة التخصص المطلوب في أقرب وقت ممكن.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white bg-opacity-20 rounded-lg p-2 text-center">
+                            <div class="text-white font-semibold mb-1 text-sm">📞 تواصل معنا</div>
+                            <div class="text-blue-100 text-xs">
+                                استجابة سريعة خلال 24 ساعة
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/972568401548?text=مرحباً، أريد إضافة تخصص جديد في قسم الأدب الإنجليزي" target="_blank" class="premium-btn w-full py-2 text-sm font-bold flex items-center justify-center">
+                        <i class="fab fa-whatsapp ml-1 text-lg"></i>
+                        طلب إضافة تخصص
+                    </a>
+                </div>
+            </div>
+            
+            <!-- معلومات إضافية - تم حذف هذا القسم -->
+        </main>
+    </div>
+    
+    <!-- Font Awesome للأيقونات -->
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    
+    <!-- JavaScript للتأثيرات -->
+    <script>
+        // تأثير الظهور التدريجي
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // مراقبة العناصر للظهور التدريجي
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+        
+        // تأثيرات إضافية للكاردز
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-15px) scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
